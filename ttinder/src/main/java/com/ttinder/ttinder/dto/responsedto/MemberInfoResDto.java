@@ -24,7 +24,7 @@ public class MemberInfoResDto {
 
     private String gender;
 
-    private LocalDate birthDate;
+//    private LocalDate birthDate;
 
     private String mbti;
 
