@@ -29,7 +29,7 @@ public class MemberController {
         return ResponseDto.success(memberService.login(loginReqDto, response));
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/signout")
     public ResponseDto<SuccessResDto> logout(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseDto.success(memberService.logout(userDetails.getAccount()));
     }
