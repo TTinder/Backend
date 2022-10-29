@@ -1,16 +1,31 @@
 package com.ttinder.ttinder.S3;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class CommonUtils {
-    private static final String FILE_EXTENSION_SEPARATOR = ".";
-    private static final String CATEGORY_PREFIX = "Server";
-    private static final String TIME_SEPARATOR = "." ;
 
     public static String buildFileName(String originalFileName) {
-        int fileExtensionIndex = originalFileName.lastIndexOf(FILE_EXTENSION_SEPARATOR);
-        String fileExtension = originalFileName.substring(fileExtensionIndex);
-        String fileName = originalFileName.substring(0, fileExtensionIndex);
-        String now = String.valueOf(System.currentTimeMillis());
+        // 이미지파일명 중복 방지
+        return UUID.randomUUID().toString().concat(getFileExtension(originalFileName));
+    }
 
-        return CATEGORY_PREFIX + fileName + TIME_SEPARATOR + now + fileExtension;
+    // 파일 유효성 검사
+    private static String getFileExtension(String fileName) {
+        if (fileName.length() == 0) {
+            throw new IllegalArgumentException();
+        }
+        ArrayList<String> fileValidate = new ArrayList<>();
+        fileValidate.add(".jpg");
+        fileValidate.add(".jpeg");
+        fileValidate.add(".png");
+        fileValidate.add(".JPG");
+        fileValidate.add(".JPEG");
+        fileValidate.add(".PNG");
+        String idxFileName = fileName.substring(fileName.lastIndexOf("."));
+        if (!fileValidate.contains(idxFileName)) {
+            throw new IllegalArgumentException();
+        }
+        return fileName.substring(fileName.lastIndexOf("."));
     }
 }

@@ -10,8 +10,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class MemberInfoReqDto {
 
-    @NotBlank
-    private String photo;
+//    @NotBlank
+//    private String photo;
 
     @NotBlank
     private String userName;
@@ -19,8 +19,8 @@ public class MemberInfoReqDto {
     @NotBlank
     private String gender;
 
-    @NotBlank
-    private LocalDate birthDate;
+//    @NotBlank
+//    private String birthDate;
 
     @NotBlank
     private String mbti;
@@ -30,8 +30,4 @@ public class MemberInfoReqDto {
 
     @NotBlank
     private String introduce;
-
-    @NotBlank
-    private int logging;
-
 }

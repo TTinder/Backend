@@ -55,21 +55,20 @@ public class MemberService {
             refreshTokenRepository.save(newToken);
         }
 
-
         setHeader(response, tokenDto);
 
-
         // MemberInfoRepository 에 Optional <MemberInfo> findByMember(member); 추가
-        /*if(memberInfoRepository.findByMember(member).isPresent()){
+        if(memberInfoRepository.findByMember(member).isPresent()){
+            // logging -> true
             return new MemberResDto(member,true);
-        }*/
+        }
         return new MemberResDto(member,false);
     }
 
     @Transactional
     public SuccessResDto logout(Member member){
          MemberInfo memberInfo = memberInfoRepository.findByMember(member).orElse(null);
-        // memberInfo.update(false); // logging
+         memberInfo.updateLogging(false); // logging
         return new SuccessResDto(true); // 해당 멤버 info logging을 false로 변경
     }
 
