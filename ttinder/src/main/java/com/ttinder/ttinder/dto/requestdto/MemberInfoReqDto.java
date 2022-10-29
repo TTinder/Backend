@@ -13,21 +13,21 @@ public class MemberInfoReqDto {
 //    @NotBlank
 //    private String photo;
 
-    @NotBlank
+//    @NotBlank
     private String userName;
 
-    @NotBlank
+//    @NotBlank
     private String gender;
 
 //    @NotBlank
 //    private String birthDate;
 
-    @NotBlank
+//    @NotBlank
     private String mbti;
 
-    @NotBlank
+//    @NotBlank
     private String location;
 
-    @NotBlank
+//    @NotBlank
     private String introduce;
 }

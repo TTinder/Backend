@@ -10,10 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -26,6 +23,11 @@ import java.util.List;
 public class MemberInfoController {
 
     private final MemberInfoService memberInfoService;
+
+//    @GetMapping("/info/{memberInfoId}")
+//    public ResponseDto<?> getDetailPost(@PathVariable("memberInfoId") Long id) {
+//        return memberInfoService.getDetailPost(id);
+//    }
 
     @PostMapping("/info")
     public ResponseDto<?> saveInfo(@RequestPart(required = false, value = "file") List<MultipartFile> multipartFile,
@@ -40,12 +42,6 @@ public class MemberInfoController {
 ////                                                            @RequestParam("dto") MemberInfoReqDto memberInfoReqDto,                // not needed application/json
 ////                                                                            @RequestParam String title,
 ////                                                                            @RequestParam String content,
-////                                                                            @RequestParam Integer lowPrice,
-////                                                                            @RequestParam Integer lowPrice,
-////                                                                            @RequestParam Integer lowPrice,
-////                                                                            @RequestParam Integer lowPrice,
-////                                                                            @RequestParam Integer lowPrice,
-////                                                                            @RequestParam Integer lowPrice,
 ////                                                                            @RequestParam Integer lowPrice,
 //                                                  @RequestPart(value = "file", required = false) MultipartFile multipartFile) throws JsonProcessingException {
 //        log.info("===================");

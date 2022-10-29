@@ -22,7 +22,7 @@ public class MemberInfo extends TimeStamped {
 //    @NotBlank
 //    private String photo;
 
-    @NotBlank
+//    @NotBlank
     private String fileName;
 
     @NotBlank
@@ -43,14 +43,14 @@ public class MemberInfo extends TimeStamped {
     @NotBlank
     private String introduce;
 
-    @NotBlank
+//    @NotBlank
     private Boolean logging;
 
     @OneToOne
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @NotBlank
+//    @NotBlank
     private Boolean info;
 
 //    public MemberInfo(MemberInfoReqDto memberInfoReqDto, Member member, String photo) {
