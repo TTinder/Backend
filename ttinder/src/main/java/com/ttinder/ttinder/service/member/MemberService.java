@@ -5,11 +5,13 @@ import com.ttinder.ttinder.dto.requestdto.LoginReqDto;
 import com.ttinder.ttinder.dto.responsedto.MemberResDto;
 import com.ttinder.ttinder.dto.responsedto.SuccessResDto;
 import com.ttinder.ttinder.entity.Member;
+import com.ttinder.ttinder.entity.MemberInfo;
 import com.ttinder.ttinder.entity.RefreshToken;
 import com.ttinder.ttinder.exception.ErrorCode;
 import com.ttinder.ttinder.exception.RequestException;
 import com.ttinder.ttinder.dto.responsedto.TokenDto;
 import com.ttinder.ttinder.jwt.util.JwtUtil;
+import com.ttinder.ttinder.repository.MemberInfoRepository;
 import com.ttinder.ttinder.repository.MemberRepository;
 import com.ttinder.ttinder.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +33,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    // private final  MemberInfoRepository memberInInfoRepository;
+     private final MemberInfoRepository memberInfoRepository;
 
 
     @Transactional
@@ -66,7 +68,7 @@ public class MemberService {
 
     @Transactional
     public SuccessResDto logout(Member member){
-        // MemberInfo memberInfo = memberInfoRepository.findByMember(member).orElse(null);
+         MemberInfo memberInfo = memberInfoRepository.findByMember(member).orElse(null);
         // memberInfo.update(false); // logging
         return new SuccessResDto(true); // 해당 멤버 info logging을 false로 변경
     }

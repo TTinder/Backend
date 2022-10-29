@@ -2,14 +2,12 @@ package com.ttinder.ttinder.service.member;
 
 import com.ttinder.ttinder.dto.requestdto.MemberInfoReqDto;
 import com.ttinder.ttinder.dto.responsedto.MemberInfoResDto;
-import com.ttinder.ttinder.dto.responsedto.MemberResDto;
+import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.entity.Member;
 import com.ttinder.ttinder.entity.MemberInfo;
-import com.ttinder.ttinder.global.ResponseDto;
 import com.ttinder.ttinder.repository.MemberInfoRepository;
 import com.ttinder.ttinder.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,9 +28,8 @@ public class MemberInfoService {
     }
     
     public ResponseDto<?> saveInfo (List<MultipartFile> multipartFile,
-MemberInfoReqDto memberInfoReqDto, String email
+                                    MemberInfoReqDto memberInfoReqDto, Member member
     ) {
-        Member member = getMember(email);
         MemberInfo memberInfo = new MemberInfo(memberInfoReqDto,member);
         memberInfoRepository.save(memberInfo);
         return ResponseDto.success(

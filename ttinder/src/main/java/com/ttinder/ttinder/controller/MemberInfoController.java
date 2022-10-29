@@ -1,22 +1,16 @@
 package com.ttinder.ttinder.controller;
 
 import com.ttinder.ttinder.dto.requestdto.MemberInfoReqDto;
-import com.ttinder.ttinder.dto.requestdto.MemberReqDto;
-import com.ttinder.ttinder.global.ResponseDto;
+import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.security.user.UserDetailsImpl;
 import com.ttinder.ttinder.service.member.MemberInfoService;
-import com.ttinder.ttinder.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,8 +22,8 @@ public class MemberInfoController {
 
     @PostMapping("/info")
     public ResponseDto<?> saveInfo(@RequestPart(required = false,value = "file") List<MultipartFile> multipartFile,
-                                     @RequestPart(value = "memberInfoReqDto") MemberInfoReqDto memberInfoReqDto,
-                                     @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws IOException {
-        return memberInfoService.saveInfo(multipartFile, memberInfoReqDto, userDetailsImpl.getMember().getEmail());
+                                   @RequestPart(value = "memberInfoReqDto") MemberInfoReqDto memberInfoReqDto,
+                                   @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws IOException {
+        return memberInfoService.saveInfo(multipartFile, memberInfoReqDto, userDetailsImpl.getAccount());
     }
 }
