@@ -18,4 +18,5 @@ public class MemberReqDto {
         this.password = encodePwd;
     }
 
+
 }

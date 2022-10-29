@@ -8,6 +8,12 @@ import java.util.Collection;
 
 public class UserDetailsImpl implements UserDetails {
 
+    public Member member;
+
+    public Member getMember() {
+        return this.member;
+    }
+
     private Member account;
 
     public Member getAccount() {
@@ -32,6 +38,8 @@ public class UserDetailsImpl implements UserDetails {
     public String getUsername() {
         return null;
     }
+
+
 
     @Override
     public boolean isAccountNonExpired() {
