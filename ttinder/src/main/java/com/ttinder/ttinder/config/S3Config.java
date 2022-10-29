@@ -1,4 +1,4 @@
-package com.ttinder.ttinder.S3;
+package com.ttinder.ttinder.config;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

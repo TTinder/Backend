@@ -1,4 +1,4 @@
-package com.ttinder.ttinder.jwt.dto;
+package com.ttinder.ttinder.dto.responsedto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

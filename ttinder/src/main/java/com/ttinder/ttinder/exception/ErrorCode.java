@@ -14,6 +14,7 @@ public enum ErrorCode {
 
     // 회원가입 관련
     USERID_DUPLICATION_409(HttpStatus.CONFLICT, "이미 가입된 회원입니다."),
+    EMAIL_SEND_400(HttpStatus.BAD_REQUEST, "이메일 발송 실패."),
 
 
 

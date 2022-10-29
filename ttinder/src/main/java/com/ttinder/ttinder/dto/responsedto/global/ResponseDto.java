@@ -1,4 +1,4 @@
-package com.ttinder.ttinder.global;
+package com.ttinder.ttinder.dto.responsedto.global;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

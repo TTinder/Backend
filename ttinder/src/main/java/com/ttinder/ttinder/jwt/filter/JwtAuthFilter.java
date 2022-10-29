@@ -1,7 +1,7 @@
 package com.ttinder.ttinder.jwt.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ttinder.ttinder.global.ResponseDto;
+import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.jwt.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

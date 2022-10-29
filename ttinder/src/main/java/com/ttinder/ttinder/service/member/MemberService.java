@@ -2,13 +2,13 @@ package com.ttinder.ttinder.service.member;
 
 
 import com.ttinder.ttinder.dto.requestdto.LoginReqDto;
-import com.ttinder.ttinder.dto.requestdto.MemberReqDto;
 import com.ttinder.ttinder.dto.responsedto.MemberResDto;
+import com.ttinder.ttinder.dto.responsedto.SuccessResDto;
 import com.ttinder.ttinder.entity.Member;
 import com.ttinder.ttinder.entity.RefreshToken;
 import com.ttinder.ttinder.exception.ErrorCode;
 import com.ttinder.ttinder.exception.RequestException;
-import com.ttinder.ttinder.jwt.dto.TokenDto;
+import com.ttinder.ttinder.dto.responsedto.TokenDto;
 import com.ttinder.ttinder.jwt.util.JwtUtil;
 import com.ttinder.ttinder.repository.MemberRepository;
 import com.ttinder.ttinder.repository.RefreshTokenRepository;
@@ -31,19 +31,8 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    @Transactional
-    public String signup(@Valid MemberReqDto memberReqDto) {
-        // Email 중복 검사
-        if(memberRepository.findByEmail(memberReqDto.getEmail()).isPresent()){
-            throw new RequestException(ErrorCode.USERID_DUPLICATION_409);
-        }
+    // private final  MemberInfoRepository memberInInfoRepository;
 
-        memberReqDto.setEncodePwd(passwordEncoder.encode(memberReqDto.getPassword()));
-        Member member = new Member(memberReqDto);
-
-        memberRepository.save(member);
-        return "회원가입 성공";
-    }
 
     @Transactional
     public MemberResDto login(@Valid LoginReqDto loginReqDto, HttpServletResponse response) {
@@ -67,9 +56,22 @@ public class MemberService {
 
         setHeader(response, tokenDto);
 
-        return new MemberResDto(member,true);
 
+        // MemberInfoRepository 에 Optional <MemberInfo> findByMember(member); 추가
+        /*if(memberInfoRepository.findByMember(member).isPresent()){
+            return new MemberResDto(member,true);
+        }*/
+        return new MemberResDto(member,false);
     }
+
+    @Transactional
+    public SuccessResDto logout(Member member){
+        // MemberInfo memberInfo = memberInfoRepository.findByMember(member).orElse(null);
+        // memberInfo.update(false); // logging
+        return new SuccessResDto(true); // 해당 멤버 info logging을 false로 변경
+    }
+
+
     public String issueToken(HttpServletRequest request, HttpServletResponse response){
         String refreshToken = jwtUtil.getHeaderToken(request, "Refresh");
         if(!jwtUtil.refreshTokenValidation(refreshToken)){

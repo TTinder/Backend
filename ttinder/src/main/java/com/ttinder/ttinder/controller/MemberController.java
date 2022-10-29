@@ -2,13 +2,13 @@ package com.ttinder.ttinder.controller;
 
 
 import com.ttinder.ttinder.dto.requestdto.LoginReqDto;
-import com.ttinder.ttinder.dto.requestdto.MemberReqDto;
 import com.ttinder.ttinder.dto.responsedto.MemberResDto;
-import com.ttinder.ttinder.global.ResponseDto;
+import com.ttinder.ttinder.dto.responsedto.SuccessResDto;
+import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
+import com.ttinder.ttinder.security.user.UserDetailsImpl;
 import com.ttinder.ttinder.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,14 +24,14 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/member/signup")
-    public ResponseEntity<ResponseDto<String>> signup(@RequestBody @Valid MemberReqDto memberReqDto) {
-        return new ResponseEntity<>(ResponseDto.success(memberService.signup(memberReqDto)),HttpStatus.CREATED);
-    }
-
-    @PostMapping("/member/login")
+    @PostMapping("/signin")
     public ResponseDto<MemberResDto> login(@RequestBody @Valid LoginReqDto loginReqDto, HttpServletResponse response) {
         return ResponseDto.success(memberService.login(loginReqDto, response));
+    }
+
+    @PostMapping("/logout")
+    public ResponseDto<SuccessResDto> logout(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return ResponseDto.success(memberService.logout(userDetails.getAccount()));
     }
 
     // 토큰 재발급

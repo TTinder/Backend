@@ -1,4 +1,4 @@
-package com.ttinder.ttinder.query;
+package com.ttinder.ttinder.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;
@@ -17,4 +17,5 @@ public class QuerydslConfig {
     public JPAQueryFactory jpaQueryFactory(){
         return new JPAQueryFactory(entityManager);
     }
+
 }

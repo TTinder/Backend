@@ -1,4 +1,4 @@
-package com.ttinder.ttinder.security;
+package com.ttinder.ttinder.config;
 
 import com.ttinder.ttinder.jwt.filter.JwtAuthFilter;
 import com.ttinder.ttinder.jwt.util.JwtUtil;

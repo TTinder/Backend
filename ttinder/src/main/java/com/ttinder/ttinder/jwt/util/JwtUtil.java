@@ -2,7 +2,7 @@ package com.ttinder.ttinder.jwt.util;
 
 
 import com.ttinder.ttinder.entity.RefreshToken;
-import com.ttinder.ttinder.jwt.dto.TokenDto;
+import com.ttinder.ttinder.dto.responsedto.TokenDto;
 import com.ttinder.ttinder.repository.RefreshTokenRepository;
 import com.ttinder.ttinder.security.user.UserDetailsServiceImpl;
 import io.jsonwebtoken.Jwts;

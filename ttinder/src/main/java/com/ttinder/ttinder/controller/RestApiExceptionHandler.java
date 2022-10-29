@@ -1,7 +1,7 @@
 package com.ttinder.ttinder.controller;
 
 import com.ttinder.ttinder.exception.RequestException;
-import com.ttinder.ttinder.global.ResponseDto;
+import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

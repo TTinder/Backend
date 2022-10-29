@@ -8,13 +8,11 @@ import lombok.NoArgsConstructor;
 @Getter
 public class MemberResDto {
     private String email;
-    private Boolean logging;
 
     private Boolean info;
 
     public MemberResDto(Member member, Boolean info) {
         this.info = info;
         this.email = member.getEmail();
-        this.logging = true;
     }
 }
