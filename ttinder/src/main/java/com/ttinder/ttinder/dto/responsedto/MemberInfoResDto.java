@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -14,22 +15,22 @@ import java.time.LocalDate;
 @Getter
 public class MemberInfoResDto {
 
-    private boolean info;
+    private Boolean logging;
 
     private String photo;
-
-    private String email;
 
     private String userName;
 
     private String gender;
 
-    private LocalDate birthDate;
+//    private Long age;
 
     private String mbti;
 
     private String location;
 
     private String introduce;
+
+//    private List<ImgResponseDto> imgResponseDtoList;
 
 }

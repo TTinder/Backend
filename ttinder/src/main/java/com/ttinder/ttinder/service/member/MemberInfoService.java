@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.util.IOUtils;
 import com.ttinder.ttinder.S3.CommonUtils;
 import com.ttinder.ttinder.dto.requestdto.MemberInfoReqDto;
+import com.ttinder.ttinder.dto.responsedto.ImgResponseDto;
 import com.ttinder.ttinder.dto.responsedto.MemberInfoResDto;
 import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.entity.Img;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -46,19 +48,24 @@ public class MemberInfoService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
+        private MemberInfo getMemberInfo(Long memberInfoId) {
+            MemberInfo MemberInfo = memberInfoRepository.findById(memberInfoId).orElseThrow();
+            //예외처리 필요
+        return MemberInfo;
+    }
+
+    // 정보 입력
     public ResponseDto<?> saveInfo(List<MultipartFile> multipartFile, MemberInfoReqDto memberInfoReqDto, Member member) throws IOException {
 
         // JSON으로 넘어온 데이터 + User객체 Post객체로 만들기
         MemberInfo memberInfo = new MemberInfo(memberInfoReqDto, member);
         // DB에 저장
         memberInfoRepository.save(memberInfo);
-
         // 넘어온 multipartFile이 있는지 확인하고 img 객체에 담고 저장하기
         // 저장할때 imgurl 이랑 postId 같이 저장하기
         // 그러려면 Img 객체에 Post를 ManyToOne 해두어야함
         // 그런 다음 상세보기에서 ImgRepository.findByPostId
         String imgUrl = "";
-
         for (MultipartFile file : multipartFile) {
             if(!file.isEmpty()) {
                 String fileName = CommonUtils.buildFileName(file.getOriginalFilename());
@@ -83,6 +90,38 @@ public class MemberInfoService {
                 "success : true"
         );
     }
+    // 상세페이지 조회
+    public ResponseDto<?> getDetailsInfo(Long memberInfoId){
+        MemberInfo memberInfo = getMemberInfo(memberInfoId);
+        Img img = imgRepository.findAllByMemberInfoId(memberInfoId).orElseThrow();
+        // 이미지 없을때 예외처리 필요
+
+        // 해당 글의 이미지 찾기
+//        List<Img> imgList = imgRepository.findAllByMemberInfoId(memberInfoId);
+//        List<ImgResponseDto> imgResponseDtoList = new ArrayList<>();
+//        for(Img img : imgList) {
+//            imgResponseDtoList.add(
+//                    ImgResponseDto.builder()
+//                            .url(img.getUrl())
+//                            .build()
+//            );
+//        }
+
+        return ResponseDto.success(
+                MemberInfoResDto.builder()
+                        .logging(memberInfo.getLogging())
+                        .photo(img.getUrl())
+//                        .imgResponseDtoList(imgResponseDtoList)
+                        .userName(memberInfo.getUserName())
+                        .gender(memberInfo.getGender())
+//                        .age()
+                        .mbti(memberInfo.getMbti())
+                        .location(memberInfo.getLocation())
+                        .introduce(memberInfo.getIntroduce())
+                        .build()
+        );
+    }
+
 
 //    private final AmazonS3ResourceStorage amazonS3ResourceStorage;
 

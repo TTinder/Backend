@@ -35,6 +35,11 @@ public class MemberInfoController {
                                    @AuthenticationPrincipal UserDetailsImpl userDetailsImpl) throws IOException {
         return memberInfoService.saveInfo(multipartFile, memberInfoReqDto, userDetailsImpl.getAccount());
     }
+
+    @GetMapping("details/{memberInfoId}")
+    public ResponseDto<?> getDetailsInfo(@PathVariable("memberInfoId") Long id){
+        return memberInfoService.getDetailsInfo(id);
+    }
 }
 //    @PostMapping("/info")
 //    public ResponseDto<?> saveInfo(@AuthenticationPrincipal UserDetailsImpl userDetailsImpl,
