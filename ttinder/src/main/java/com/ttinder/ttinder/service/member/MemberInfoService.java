@@ -32,7 +32,9 @@ public class MemberInfoService {
     private String bucketName;
 
     public ResponseDto<?> saveInfo(MultipartFile file, MemberInfoReqDto memberInfoReqDto, Member member) throws IOException {
-        memberInfoRepository.findByMember(member).orElseThrow(()->new RequestException(ErrorCode.MEMBER_BAD_REQUEST_400));
+        if(memberInfoRepository.findByMember(member).isPresent()){
+            throw new RequestException(ErrorCode.MEMBER_BAD_REQUEST_400);
+        }
         try {
             // 이미지 업로드 .upload(파일, 경로)
             String imgPath = s3Uploader.upload(file, "images");
