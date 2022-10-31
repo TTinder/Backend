@@ -29,5 +29,13 @@ public class MemberInfoResDto {
     private String introduce;
 
     private Boolean logging;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c9202b78cfca5927124f4ca275d324f1a7b24235
 
 }
+
+
+
+

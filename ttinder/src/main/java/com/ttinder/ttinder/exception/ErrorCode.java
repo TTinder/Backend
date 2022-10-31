@@ -22,11 +22,11 @@ public enum ErrorCode {
     USER_NOT_FOUND_404(HttpStatus.NOT_FOUND, "사용자를 찾을 수 없습니다."),
 
     // NOT FOUND
-    FOLDER_ID_NOT_FOUND_404(HttpStatus.NOT_FOUND, "폴더 id를 찾을 수 없습니다."),
-    PHOTO_ID_NOT_FOUND_404(HttpStatus.NOT_FOUND, "포토 id를 찾을 수 없습니다."),
+    MEMBER_BAD_REQUEST_400(HttpStatus.BAD_REQUEST, "이미 정보를 등록한 사용자입니다."),
 
 
     UNAUTHORIZED_401(HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
+    MESSAGE_EXCEED_401(HttpStatus.UNAUTHORIZED, "메시지는 총 3번밖에 보낼 수 없습니다."),
 
     // 날짜 입력 오류
     DateTimeException_400(HttpStatus.BAD_REQUEST, "잘못된 날짜입니다."),

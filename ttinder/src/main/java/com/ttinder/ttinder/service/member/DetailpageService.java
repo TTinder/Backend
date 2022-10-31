@@ -28,7 +28,7 @@ public class DetailpageService {
                         .photo(memberInfo.getPhoto())
                         .userName(memberInfo.getUserName())
                         .gender(memberInfo.getGender())
-//                        .age(memberInfo.getAge())
+                        .age(memberInfo.getAmericanAge(memberInfo.getBirthDate()))
                         .mbti(memberInfo.getMbti())
                         .location(memberInfo.getLocation())
                         .introduce(memberInfo.getIntroduce())
