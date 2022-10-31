@@ -34,11 +34,13 @@ public class MemberInfoService {
         try {
             // 이미지 업로드 .upload(파일, 경로)
             String imgPath = s3Uploader.upload(file, "images");
-            //  requestDto의 imgUrl을 imgPath의 값으로 설정                                                                                      equestDto의 imgUrl을 imgPath의 값으로 설정
+            //  requestDto의 imgUrl을 imgPath의 값으로 설정
+            //  equestDto의 imgUrl을 imgPath의 값으로 설정
             memberInfoReqDto.setPhoto(imgPath);
 
             MemberInfo memberInfo = new MemberInfo(memberInfoReqDto, member);
 
+            // birthDate : String -> LocalDate 타입으로 변환
             String date = memberInfoReqDto.getBirthDate();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate birthDate = LocalDate.parse(date, formatter);

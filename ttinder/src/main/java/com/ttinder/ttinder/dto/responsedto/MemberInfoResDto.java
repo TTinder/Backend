@@ -30,4 +30,9 @@ public class MemberInfoResDto {
 
     private Boolean logging;
 
+
 }
+
+
+
+

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
+
 @Getter
 @Entity
 @Setter
@@ -67,5 +68,21 @@ public class MemberInfo extends TimeStamped {
     // 로깅업데이트함수 로그아웃하면 logging -> 0
     public void updateLogging(Boolean logging){
         this.logging = logging;
+    }
+    // LocalDate -> ing age : 만나이로 변환
+    public int getAmericanAge(LocalDate birthDate) {
+        // 오늘 날짜
+        LocalDate today = LocalDate.now();
+        System.out.println(today);
+
+        int americanAge = today.minusYears(birthDate.getYear()).getYear(); // (1)
+        // (2)
+        // 생일이 지났는지 여부를 판단하기 위해 (1)을 입력받은 생년월일의 연도에 더한다.
+        // 연도가 같아짐으로 생년월일만 판단할 수 있다!
+        if (birthDate.plusYears(americanAge).isAfter(today)) {
+            americanAge = americanAge -1;
+        }
+        System.out.println(americanAge);
+        return americanAge;
     }
 }
