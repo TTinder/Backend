@@ -2,6 +2,7 @@ package com.ttinder.ttinder.repository;
 
 import com.ttinder.ttinder.entity.Member;
 import com.ttinder.ttinder.entity.MemberInfo;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
