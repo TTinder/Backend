@@ -27,7 +27,7 @@ public class MessageService {
     @Transactional
     public SuccessResDto sendMessage(Member member, MessageReqDto messageReqDto, Long id){
         MemberInfo memberInfo = memberInfoRepository.findByMember(member).orElse(null);
-        if(memberInfo.getMessageNum()>=2){
+        if(memberInfo.getMessageNum()>=3){
             throw new RequestException(ErrorCode.MESSAGE_EXCEED_401);
         }
         messageRepository.save(new Message(memberInfo.getId(), id, messageReqDto.getMessage())); // 보낸 사람, 받는 사람, 메시지

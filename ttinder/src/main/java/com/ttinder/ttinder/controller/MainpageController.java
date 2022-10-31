@@ -17,7 +17,11 @@ public class MainpageController {
     private final MainpageService mainpageService;
 
     @GetMapping("/mainpage")
+<<<<<<< HEAD
     public ResponseDto getAllMember(@PageableDefault(size = 5, sort = "writeTime", direction = Sort.Direction.DESC) Pageable pageable) {
+=======
+    public ResponseDto getAllMember(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+>>>>>>> 25f872aaeac7e27a556949d91861821aa117dbb6
         return mainpageService.findAllMember(pageable);
     }
 

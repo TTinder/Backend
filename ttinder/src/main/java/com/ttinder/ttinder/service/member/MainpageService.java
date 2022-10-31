@@ -22,7 +22,11 @@ public class MainpageService {
     private final MemberInfoRepository memberInfoRepository;
 
 
+<<<<<<< HEAD
     public ResponseDto<List<MainpageResDto>> findAllMember(Pageable pageable) {
+=======
+    public ResponseDto<List<MainpageResDto>> findAllMember(Pageable pageable ) {
+>>>>>>> 25f872aaeac7e27a556949d91861821aa117dbb6
         Page<MemberInfo> allMember = memberInfoRepository.findAll(pageable);//다른 성별만 조회하기 추가해야함
         List<MainpageResDto> memberLists = new ArrayList<>();
         for (MemberInfo memberInfo : allMember) {
