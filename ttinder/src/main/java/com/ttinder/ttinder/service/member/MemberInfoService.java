@@ -5,6 +5,8 @@ import com.ttinder.ttinder.dto.requestdto.MemberInfoReqDto;
 import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.entity.Member;
 import com.ttinder.ttinder.entity.MemberInfo;
+import com.ttinder.ttinder.exception.ErrorCode;
+import com.ttinder.ttinder.exception.RequestException;
 import com.ttinder.ttinder.repository.MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Service
@@ -31,6 +32,7 @@ public class MemberInfoService {
     private String bucketName;
 
     public ResponseDto<?> saveInfo(MultipartFile file, MemberInfoReqDto memberInfoReqDto, Member member) throws IOException {
+        memberInfoRepository.findByMember(member).orElseThrow(()->new RequestException(ErrorCode.MEMBER_BAD_REQUEST_400));
         try {
             // 이미지 업로드 .upload(파일, 경로)
             String imgPath = s3Uploader.upload(file, "images");
@@ -49,7 +51,6 @@ public class MemberInfoService {
             memberInfoRepository.save(memberInfo);
             return ResponseDto.success("success : true");
         } catch (NullPointerException e) {
-            System.out.println("회원이 존재하지 않습니다.");
             return ResponseDto.fails(HttpStatus.FORBIDDEN, "등록 실패");
         }
     }
