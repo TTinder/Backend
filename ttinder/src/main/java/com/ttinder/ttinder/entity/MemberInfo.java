@@ -19,11 +19,13 @@ public class MemberInfo extends TimeStamped {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotBlank
-//    private String photo;
+    @NotBlank
+    private String photo;
+
+    private int messageNum;
 
 //    @NotBlank
-    private String fileName;
+//    private String fileName;
 
     @NotBlank
     private String userName;
@@ -31,8 +33,7 @@ public class MemberInfo extends TimeStamped {
     @NotBlank
     private String gender;
 
-//    @NotBlank
-//    private LocalDate birthDate;
+    private LocalDate birthDate;
 
     @NotBlank
     private String mbti;
@@ -43,39 +44,25 @@ public class MemberInfo extends TimeStamped {
     @NotBlank
     private String introduce;
 
-//    @NotBlank
     private Boolean logging;
 
     @OneToOne
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-//    @NotBlank
     private Boolean info;
 
-//    public MemberInfo(MemberInfoReqDto memberInfoReqDto, Member member, String photo) {
-//        this.photo = photo;
-//        this.userName = memberInfoReqDto.getUserName();
-//        this.gender = memberInfoReqDto.getGender();
-////        this.birthDate = memberInfoReqDto.getBirthDate();
-//        this.mbti = memberInfoReqDto.getMbti();
-//        this.location = memberInfoReqDto.getLocation();
-//        this.introduce = memberInfoReqDto.getIntroduce();
-//        this.member = member;
-//        this.info = true;
-//        this.logging = true;
-//    }
-
     public MemberInfo(MemberInfoReqDto memberInfoReqDto, Member member) {
+        this.photo = memberInfoReqDto.getPhoto();
         this.userName = memberInfoReqDto.getUserName();
         this.gender = memberInfoReqDto.getGender();
-//        this.birthDate = memberInfoReqDto.getBirthDate();
         this.mbti = memberInfoReqDto.getMbti();
         this.location = memberInfoReqDto.getLocation();
         this.introduce = memberInfoReqDto.getIntroduce();
         this.member = member;
         this.info = true;
         this.logging = true;
+        this.messageNum = 0;
     }
     // 로깅업데이트함수 로그아웃하면 logging -> 0
     public void updateLogging(Boolean logging){
