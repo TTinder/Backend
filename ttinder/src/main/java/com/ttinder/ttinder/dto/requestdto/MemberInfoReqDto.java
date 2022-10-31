@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -16,21 +15,21 @@ public class MemberInfoReqDto {
     @NotBlank
     private String photo;
 
-//    @NotBlank
+    @NotBlank
     private String userName;
 
-//    @NotBlank
+    @NotBlank
     private String gender;
 
     @NotBlank
     private String birthDate;
 
-//    @NotBlank
+    @NotBlank
     private String mbti;
 
-//    @NotBlank
+    @NotBlank
     private String location;
 
-//    @NotBlank
+    @NotBlank
     private String introduce;
 }

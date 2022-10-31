@@ -73,7 +73,6 @@ public class MemberInfo extends TimeStamped {
     public int getAmericanAge(LocalDate birthDate) {
         // 오늘 날짜
         LocalDate today = LocalDate.now();
-        System.out.println(today);
 
         int americanAge = today.minusYears(birthDate.getYear()).getYear(); // (1)
         // (2)
@@ -82,7 +81,6 @@ public class MemberInfo extends TimeStamped {
         if (birthDate.plusYears(americanAge).isAfter(today)) {
             americanAge = americanAge -1;
         }
-        System.out.println(americanAge);
         return americanAge;
     }
 }
