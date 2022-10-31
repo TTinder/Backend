@@ -14,6 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 @Slf4j
@@ -33,7 +36,14 @@ public class MemberInfoService {
             String imgPath = s3Uploader.upload(file, "images");
             //  requestDto의 imgUrl을 imgPath의 값으로 설정                                                                                      equestDto의 imgUrl을 imgPath의 값으로 설정
             memberInfoReqDto.setPhoto(imgPath);
+
             MemberInfo memberInfo = new MemberInfo(memberInfoReqDto, member);
+
+            String date = memberInfoReqDto.getBirthDate();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate birthDate = LocalDate.parse(date, formatter);
+            memberInfo.setBirthDate(birthDate);
+
             memberInfoRepository.save(memberInfo);
             return ResponseDto.success("success : true");
         } catch (NullPointerException e) {

@@ -22,8 +22,8 @@ public class MemberInfoReqDto {
 //    @NotBlank
     private String gender;
 
-//    @NotBlank
-//    private String birthDate;
+    @NotBlank
+    private String birthDate;
 
 //    @NotBlank
     private String mbti;

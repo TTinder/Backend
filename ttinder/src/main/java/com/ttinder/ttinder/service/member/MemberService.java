@@ -57,9 +57,9 @@ public class MemberService {
 
         setHeader(response, tokenDto);
 
-        // MemberInfoRepository 에 Optional <MemberInfo> findByMember(member); 추가
         if(memberInfoRepository.findByMember(member).isPresent()){
-            // logging -> true
+            MemberInfo memberInfo = memberInfoRepository.findByMember(member).orElse(null);
+            memberInfo.updateLogging(true);
             return new MemberResDto(member,true);
         }
         return new MemberResDto(member,false);
