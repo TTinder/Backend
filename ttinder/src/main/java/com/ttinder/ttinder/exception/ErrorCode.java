@@ -27,6 +27,7 @@ public enum ErrorCode {
 
 
     UNAUTHORIZED_401(HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
+    MESSAGE_EXCEED_401(HttpStatus.UNAUTHORIZED, "메시지는 총 3번밖에 보낼 수 없습니다."),
 
     // 날짜 입력 오류
     DateTimeException_400(HttpStatus.BAD_REQUEST, "잘못된 날짜입니다."),

@@ -1,6 +1,7 @@
 package com.ttinder.ttinder.entity;
 
 import com.ttinder.ttinder.dto.requestdto.MemberInfoReqDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Entity
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class MemberInfo extends TimeStamped {
 
     @Id
@@ -83,4 +85,9 @@ public class MemberInfo extends TimeStamped {
         }
         return americanAge;
     }
+
+    public void plusMessageNum(){
+        this.messageNum += 1;
+    }
+
 }

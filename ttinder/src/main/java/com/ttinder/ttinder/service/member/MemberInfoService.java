@@ -5,6 +5,8 @@ import com.ttinder.ttinder.dto.requestdto.MemberInfoReqDto;
 import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.entity.Member;
 import com.ttinder.ttinder.entity.MemberInfo;
+import com.ttinder.ttinder.exception.ErrorCode;
+import com.ttinder.ttinder.exception.RequestException;
 import com.ttinder.ttinder.repository.MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
