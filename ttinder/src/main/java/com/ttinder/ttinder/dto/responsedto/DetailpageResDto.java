@@ -5,14 +5,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
-
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class MemberInfoResDto {
+public class DetailpageResDto {
 
     private String photo;
 
