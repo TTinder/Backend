@@ -21,14 +21,19 @@ public class MainpageService {
 
     private final MemberInfoRepository memberInfoRepository;
 
-
-
-    public ResponseDto<List<MainpageResDto>> findAllMember(Pageable pageable) {
+    public List<MainpageResDto> findAllMember(Pageable pageable) {
         Page<MemberInfo> allMember = memberInfoRepository.findAll(pageable);//다른 성별만 조회하기 추가해야함
         List<MainpageResDto> memberLists = new ArrayList<>();
         for (MemberInfo memberInfo : allMember) {
             memberLists.add(new MainpageResDto(memberInfo));
         }
-        return ResponseDto.success(memberLists);
+        return memberLists;
     }
+
+    public List<MainpageResDto> filter(Pageable pageable, List<String> gender, List<Integer> age, List<String> mbti, List<String> location){
+        // age 처리
+
+    }
+
+
 }

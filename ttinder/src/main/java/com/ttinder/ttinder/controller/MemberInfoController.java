@@ -33,13 +33,4 @@ public class MemberInfoController {
         return memberInfoService.saveInfo(file, memberInfoReqDto, userDetailsImpl.getAccount());
     }
 
-    @GetMapping("/mainpage/filter")
-    public List<MemberInfo> findByGender(@RequestParam(value = "gender", required = false, defaultValue = "ALL") String gender,
-                                         @RequestParam(value = "location", required = false, defaultValue = "ALL") String location,
-                                         @RequestParam(value = "mbti", required = false, defaultValue = "ALL") String mbti){
-                System.out.println(gender);
-                System.out.println(location);
-                System.out.println(mbti);
-                return memberInfoQueryRepository.findByGender(gender, location, mbti);
-            }
 }

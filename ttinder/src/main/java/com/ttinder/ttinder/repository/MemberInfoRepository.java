@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface MemberInfoRepository extends JpaRepository<MemberInfo,Long> {
+public interface MemberInfoRepository extends JpaRepository<MemberInfo,Long>, MemberInfoQueryRepository{
     Optional<MemberInfo> findByMember(Member member);
 
 //    Optional<MemberInfo> findAllByGender(String gender);
