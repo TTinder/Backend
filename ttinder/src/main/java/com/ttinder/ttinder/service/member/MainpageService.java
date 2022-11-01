@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,25 @@ public class MainpageService {
 
     private final MemberInfoRepository memberInfoRepository;
 
+    // age list->  birthdate (localdate list)
+    // 24,27  순서
+    //List<LocalDate> birthDate = new Arraylsa
+
+    //920829 30 880325 34  221102 30~34 871103(연도-만나이-1,날짜+1)~931102(연도-만나이+1,날짜)
+
+    public List<LocalDate> getbirthDate(int ageMin, int ageMax) {
+        LocalDate today = LocalDate.now(); // 현재 날짜 구하기
+        LocalDate birthDateMin = today.minusYears(ageMax).minusYears(1).plusDays(1);
+        LocalDate birthDateMax = today.minusYears(ageMin).plusYears(1);
+
+        System.out.println(birthDateMin);
+        System.out.println(birthDateMax);
+
+        List<LocalDate> birthDate = new ArrayList<> (Arrays.asList(birthDateMin,birthDateMax));
+        return birthDate;
+    }
+
+
     //메인페이지
     public List<MainpageResDto> findAllMember(Pageable pageable) {
         Page<MemberInfo> allMember = memberInfoRepository.findAll(pageable);//다른 성별만 조회하기 추가해야함
@@ -30,13 +50,15 @@ public class MainpageService {
         return memberLists;
     }
 
+
+
+
     //메인페이지 필터링
     public List<MainpageResDto> filter(Pageable pageable, List<String> gender, List<Integer> age, List<String> mbti, List<String> location){
+        List<LocalDate> birthDate = getbirthDate(age.get(0),age.get(1));
 
-        // age list->  birthdate (localdate list)
-        // 24,27  순서
-        //List<LocalDate> birthDate = new Arraylsa
-        Page<MemberInfo> filteredMember = memberInfoRepository.findFilter(pageable,gender, birthDate, mbti, location);
+        Page<MemberInfo> filteredMember = memberInfoRepository.findFilter(pageable, gender, birthDate, mbti, location);
+
         List<MainpageResDto> memberLists = filteredMember.stream()
                 .map(MainpageResDto::new).collect(Collectors.toList());
 
