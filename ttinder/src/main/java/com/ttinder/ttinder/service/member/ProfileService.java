@@ -15,13 +15,11 @@ public class ProfileService {
     private final MemberInfoRepository memberInfoRepository;
 
 
-    public ResponseDto<?> getProfile(Member member) {
+    public ProfileResDto getProfile(Member member) {
         MemberInfo memberInfo = memberInfoRepository.findByMember(member).orElse(null);
-        return ResponseDto.success(
-                ProfileResDto.builder()
+        return ProfileResDto.builder()
                         .photo(memberInfo.getPhoto())
                         .userName(memberInfo.getUserName())
-                        .build()
-        );
+                        .build();
     }
 }

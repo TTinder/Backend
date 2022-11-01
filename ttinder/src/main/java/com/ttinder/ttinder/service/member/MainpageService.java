@@ -22,21 +22,21 @@ public class MainpageService {
 
     private final MemberInfoRepository memberInfoRepository;
 
+    //메인페이지
     public List<MainpageResDto> findAllMember(Pageable pageable) {
         Page<MemberInfo> allMember = memberInfoRepository.findAll(pageable);//다른 성별만 조회하기 추가해야함
-        List<MainpageResDto> memberLists = new ArrayList<>();
-        for (MemberInfo memberInfo : allMember) {
-            memberLists.add(new MainpageResDto(memberInfo));
-        }
+        List<MainpageResDto> memberLists = allMember.stream()
+                .map(MainpageResDto::new).collect(Collectors.toList());
         return memberLists;
     }
 
+    //메인페이지 필터링
     public List<MainpageResDto> filter(Pageable pageable, List<String> gender, List<Integer> age, List<String> mbti, List<String> location){
 
         // age list->  birthdate (localdate list)
         // 24,27  순서
         //List<LocalDate> birthDate = new Arraylsa
-        Page<MemberInfo> filteredMember = memberInfoRepository.findFilter();
+        Page<MemberInfo> filteredMember = memberInfoRepository.findFilter(pageable,gender, birthDate, mbti, location);
         List<MainpageResDto> memberLists = filteredMember.stream()
                 .map(MainpageResDto::new).collect(Collectors.toList());
 

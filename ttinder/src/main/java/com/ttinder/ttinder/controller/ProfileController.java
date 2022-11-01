@@ -1,5 +1,6 @@
 package com.ttinder.ttinder.controller;
 
+import com.ttinder.ttinder.dto.responsedto.ProfileResDto;
 import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.security.user.UserDetailsImpl;
 import com.ttinder.ttinder.service.member.ProfileService;
@@ -14,7 +15,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @GetMapping("/profile")
-    public ResponseDto<?> getProfile(@AuthenticationPrincipal UserDetailsImpl userDetails){
-        return profileService.getProfile(userDetails.getAccount());
+    public ResponseDto<ProfileResDto> getProfile(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return ResponseDto.success(profileService.getProfile(userDetails.getAccount()));
     }
 }

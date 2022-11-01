@@ -1,5 +1,6 @@
 package com.ttinder.ttinder.controller;
 
+import com.ttinder.ttinder.dto.responsedto.DetailpageResDto;
 import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.service.member.DetailpageService;
 import com.ttinder.ttinder.service.member.MemberInfoService;
@@ -16,7 +17,7 @@ public class DetailpageController {
 
     //
     @GetMapping("details/{memberInfoId}")
-    public ResponseDto<?> getDetailsInfo(@PathVariable("memberInfoId") Long id){
-        return detailpageService.getDetailsInfo(id);
+    public ResponseDto<DetailpageResDto> getDetailsInfo(@PathVariable("memberInfoId") Long id){
+        return ResponseDto.success(detailpageService.getDetailsInfo(id));
     }
 }

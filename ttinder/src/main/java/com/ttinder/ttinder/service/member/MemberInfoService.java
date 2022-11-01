@@ -2,6 +2,7 @@ package com.ttinder.ttinder.service.member;
 
 import com.ttinder.ttinder.S3.S3Uploader;
 import com.ttinder.ttinder.dto.requestdto.MemberInfoReqDto;
+import com.ttinder.ttinder.dto.responsedto.SuccessResDto;
 import com.ttinder.ttinder.dto.responsedto.global.ResponseDto;
 import com.ttinder.ttinder.entity.Member;
 import com.ttinder.ttinder.entity.MemberInfo;
@@ -31,11 +32,10 @@ public class MemberInfoService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
-    public ResponseDto<?> saveInfo(MultipartFile file, MemberInfoReqDto memberInfoReqDto, Member member) throws IOException {
-        if(memberInfoRepository.findByMember(member).isPresent()){
+    public SuccessResDto saveInfo(MultipartFile file, MemberInfoReqDto memberInfoReqDto, Member member) throws IOException {
+        if (memberInfoRepository.findByMember(member).isPresent()) {
             throw new RequestException(ErrorCode.MEMBER_BAD_REQUEST_400);
         }
-        try {
             // 이미지 업로드 .upload(파일, 경로)
             String imgPath = s3Uploader.upload(file, "images");
             //  requestDto의 imgUrl을 imgPath의 값으로 설정
@@ -51,9 +51,6 @@ public class MemberInfoService {
             memberInfo.setBirthDate(birthDate);
 
             memberInfoRepository.save(memberInfo);
-            return ResponseDto.success("success : true");
-        } catch (NullPointerException e) {
-            return ResponseDto.fails(HttpStatus.FORBIDDEN, "등록 실패");
-        }
+            return new SuccessResDto(true);
     }
 }

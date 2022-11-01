@@ -20,10 +20,9 @@ public class DetailpageService {
         return memberInfo;
     }
 
-    public ResponseDto<?> getDetailsInfo(Long memberInfoId){
+    public DetailpageResDto getDetailsInfo(Long memberInfoId){
         MemberInfo memberInfo = getMemberInfo(memberInfoId);
-        return ResponseDto.success(
-                DetailpageResDto.builder()
+        return DetailpageResDto.builder()
                         .logging(memberInfo.getLogging())
                         .photo(memberInfo.getPhoto())
                         .userName(memberInfo.getUserName())
@@ -32,7 +31,6 @@ public class DetailpageService {
                         .mbti(memberInfo.getMbti())
                         .location(memberInfo.getLocation())
                         .introduce(memberInfo.getIntroduce())
-                        .build()
-        );
+                        .build();
     }
 }
