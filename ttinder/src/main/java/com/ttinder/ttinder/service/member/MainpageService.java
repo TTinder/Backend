@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -31,8 +32,15 @@ public class MainpageService {
     }
 
     public List<MainpageResDto> filter(Pageable pageable, List<String> gender, List<Integer> age, List<String> mbti, List<String> location){
-        // age 처리
 
+        // age list->  birthdate (localdate list)
+        // 24,27  순서
+        //List<LocalDate> birthDate = new Arraylsa
+        Page<MemberInfo> filteredMember = memberInfoRepository.findFilter();
+        List<MainpageResDto> memberLists = filteredMember.stream()
+                .map(MainpageResDto::new).collect(Collectors.toList());
+
+        return memberLists;
     }
 
 

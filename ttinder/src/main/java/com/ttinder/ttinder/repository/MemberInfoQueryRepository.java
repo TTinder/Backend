@@ -12,6 +12,6 @@ import java.util.List;
 import static com.ttinder.ttinder.entity.QMemberInfo.memberInfo;
 
 public interface MemberInfoQueryRepository {
-    List<MemberInfo> findByGender(Pageable pageable, List<String> gender, List<LocalDate> birthDate, List<String> mbti, List<String> location) ;
+    List<MemberInfo> findFilter(Pageable pageable, List<String> gender, List<LocalDate> birthDate, List<String> mbti, List<String> location) ;
 }
 

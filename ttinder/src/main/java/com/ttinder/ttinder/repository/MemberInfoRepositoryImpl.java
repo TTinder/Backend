@@ -20,19 +20,19 @@ public class MemberInfoRepositoryImpl implements MemberInfoQueryRepository{
 
 
     @Override
-    public List<MemberInfo> findByGender(Pageable pageable, List<String> gender, List<LocalDate> birthDate, List<String> mbti, List<String> location) {
+    public List<MemberInfo> findFilter(Pageable pageable, List<String> gender, List<LocalDate> birthDate, List<String> mbti, List<String> location) {
 
         QMemberInfo memberInfo = QMemberInfo.memberInfo;
 
-        /*return queryFactory
+        return queryFactory
                 .from(memberInfo)
                 .select(memberInfo)
-                .where(memberInfo.gender.eq(gender))
-                .where(memberInfo.mbti.eq(mbti))
-                .where(memberInfo.location.eq(location))
+                .where(memberInfo.gender.in(gender))
+                .where(memberInfo.mbti.in(mbti))
+                .where(memberInfo.location.in(location))
+                .where(memberInfo.birthDate.between(birthDate.get(0),birthDate.get(1)))
                 .limit(pageable.getPageSize()) // 현재 제한한 갯수
-                .offset(pageable.getOffset()) // 조회 시작위치
-//                .where(memberInfo.mbti.eq(age))
-                .fetch();*/
+                .offset(pageable.getOffset())
+                .fetch();
     }
 }
