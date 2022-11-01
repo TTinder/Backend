@@ -15,4 +15,5 @@ public class TtinderApplication {
 		SpringApplication.run(TtinderApplication.class, args);
 	}
 
+
 }
