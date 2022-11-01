@@ -28,11 +28,10 @@ public class MainpageController {
 
     @GetMapping("/mainpage/filter")
     public ResponseDto<List<MainpageResDto>> findFilter(@PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
-                                         @RequestParam(value = "gender", required = false, defaultValue = "ALL") List<String> gender,
-                                         @RequestParam(value = "age", required = false, defaultValue = "ALL") List<Integer> age,
-                                         @RequestParam(value = "mbti", required = false, defaultValue = "ALL") List<String> mbti,
-                                         @RequestParam(value = "location", required = false, defaultValue = "ALL") List<String> location){
-
+                                         @RequestParam(value = "gender", required = false) List<String> gender,
+                                         @RequestParam(value = "age", required = false) List<Integer> age,
+                                         @RequestParam(value = "mbti", required = false) List<String> mbti,
+                                         @RequestParam(value = "location", required = false) List<String> location){
         return ResponseDto.success(mainpageService.filter(pageable,gender,age,mbti,location));
     }
 }

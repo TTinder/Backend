@@ -34,9 +34,6 @@ public class MainpageService {
         LocalDate birthDateMin = today.minusYears(ageMax).minusYears(1).plusDays(1);
         LocalDate birthDateMax = today.minusYears(ageMin).plusYears(1);
 
-        System.out.println(birthDateMin);
-        System.out.println(birthDateMax);
-
         List<LocalDate> birthDate = new ArrayList<> (Arrays.asList(birthDateMin,birthDateMax));
         return birthDate;
     }

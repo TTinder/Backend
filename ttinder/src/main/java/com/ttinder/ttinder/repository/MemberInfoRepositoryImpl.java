@@ -37,6 +37,7 @@ public class MemberInfoRepositoryImpl implements MemberInfoQueryRepository{
                 .where(memberInfo.birthDate.between(birthDate.get(0),birthDate.get(1)))
                 .limit(pageable.getPageSize()) // 현재 제한한 갯수
                 .offset(pageable.getOffset())
+                .orderBy(memberInfo.id.desc())
                 .fetchResults();
             return new PageImpl<>(result.getResults(),pageable,result.getTotal());
 
