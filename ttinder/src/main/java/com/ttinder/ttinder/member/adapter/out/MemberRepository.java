@@ -1,0 +1,10 @@
+package com.ttinder.ttinder.member.adapter.out;
+
+import com.ttinder.ttinder.member.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
+    Optional<Member> findByEmail(String email);
+}
