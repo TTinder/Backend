@@ -1,4 +1,4 @@
-package com.ttinder.ttinder.member.application.port.in;
+package com.ttinder.ttinder.member.adapter.in;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
