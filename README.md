@@ -15,10 +15,12 @@
 회원가입 시 중복 가입, 유효하지 않은 이메일로 가입하는 것을 방지하고자
 이메일 코드 발송 후 확인하는 절차 추가
 
+
 **2. 회원 정보 필터링, 페이징**
 
 검색하고 싶은 성별, 연령대, MBTI, 지역으로 회원정보 중복 필터링 가능
 5개 회원 프로필 단위로 페이징 처리 (무한 스크롤)
+
 
 **3. 메시지 보내기**
 
@@ -45,14 +47,48 @@
 
 EC2 인스턴스 포트 25번 열어줘야 이메일 코드 발송 가능
 
+
 **2. 회원정보에 나이 입력시 LocalDate로 저장**
 
 해가 바뀔때마다 나이가 달라져 DB에 회원정보 입력시 출생년월로 입력해줘야 하는데,
-출력시에는 나이로 환산해서 프론트에 전달해줘야 한다.
+출력시에는 나이로 환산해서 프론트에 전달
 
-**3. Postman으로 필터링 처리 GET 요청시 body부분에 입력된 값이 @RequestParam으로 Query랑 같이 들어옴**
 
-**4.  **
+**3. Postman으로 필터링 처리 GET 요청시 body부분에 입력된 값이 @RequestParam으로 Query랑 같이 중복되어 전달**
+
+Param값이 중복으로 입력되어, body부분 입력값을 지워서 해결
+
+
+**4. Query DSL**
+
+Query DSL로 페이징 처리시 List타입을 Page타입으로 바꾸기 위해 QueryResults, PageImpl를 사용
+
+```java
+    public Page<MemberInfo> findFilter(Pageable pageable, List<String> gender, List<LocalDate> birthDate, List<String> mbti, List<String> location) {
+
+        QMemberInfo memberInfo = QMemberInfo.memberInfo;
+
+        QueryResults<MemberInfo> result = queryFactory
+                .from(memberInfo)
+                .select(memberInfo)
+                .where(memberInfo.gender.in(gender))
+                .where(memberInfo.mbti.in(mbti))
+                .where(memberInfo.location.in(location))
+                .where(memberInfo.birthDate.between(birthDate.get(0),birthDate.get(1)))
+                .limit(pageable.getPageSize()) // 현재 제한한 갯수
+                .offset(pageable.getOffset())
+                .orderBy(memberInfo.id.desc())
+                .fetchResults();
+            return new PageImpl<>(result.getResults(),pageable,result.getTotal());
+
+    }
+```
+
+
+**5. /logout URL을 /login URL 없이 사용불가 **
+
+/logout URL을 /signout URL로 이름을 변경하여 해결
+
 
 
 ### BackEnd 팀원 깃허브
