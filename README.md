@@ -86,6 +86,7 @@ Query DSL로 페이징 처리시 List타입을 Page타입으로 바꾸기 위해
 
 <br>
 
+
 **5. /logout URL을 /login URL 없이 사용불가**
 
 /logout URL을 /signout URL로 이름을 변경하여 해결
